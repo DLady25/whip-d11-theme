@@ -1,0 +1,54 @@
+/* ========================================
+   The top-right notifications (#ui-notifications, js/ui.js renderToStack) in the D11 look. WHIP uses this
+   stack when the capsule at the bottom cannot show (dead, HUD hidden, a screen open). A dark card with a thin
+   border and a side edge in the type's colour, Geist text, right 1.6rem. WHIP draws the stack at 2x zoom; here
+   it goes back to the HUD's (--ui-scale x 1.25) and --d11-u is 1rem on screen, as on #hotbar.
+   ======================================== */
+#ui-notifications {
+    --nz: calc(var(--ui-scale) * 1.25);
+    --d11-u: calc(16px / var(--nz));
+    zoom: var(--nz);
+    /* 150px from the top (room for a server logo); with WHIP's objectives on screen (--obj-n) it moves below
+       their cards. An objective card is 110px x --ui-scale on screen = 88px at this scale. */
+    top: calc((150px + var(--dbg-h, 0px)) / var(--nz) + var(--obj-n, 0) * 88px);
+    right: calc(1.6 * var(--d11-u));
+    align-items: flex-end;
+    gap: calc(.4 * var(--d11-u));
+    max-width: calc(22 * var(--d11-u));
+}
+
+.ui-notif {
+    gap: calc(.6 * var(--d11-u));
+    padding: calc(.5 * var(--d11-u)) calc(.75 * var(--d11-u)) calc(.5 * var(--d11-u)) calc(.55 * var(--d11-u));
+    border-radius: calc(.5 * var(--d11-u));
+    background: rgba(9, 13, 20, .9);
+    border: 1px solid rgba(255, 255, 255, .08);
+    border-left: 2px solid var(--ui-info);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .45);
+    font: 600 calc(.82 * var(--d11-u))/1.35 var(--ui-font);
+    letter-spacing: .005em;
+    color: var(--ui-text);
+    overflow-wrap: anywhere;
+    transform: translateX(calc(.75 * var(--d11-u)));
+}
+.ui-notif.visible { transform: translateX(0); }
+.ui-notif.exiting { transform: translateX(calc(.75 * var(--d11-u))); }
+
+/* the type's mark: a tinted small square with the symbol in the type's colour (instead of WHIP's solid block) */
+.ui-notif-icon {
+    width: calc(1.45 * var(--d11-u));
+    height: calc(1.45 * var(--d11-u));
+    border-radius: calc(.3 * var(--d11-u));
+    font-size: calc(.8 * var(--d11-u));
+    color: var(--ui-info);
+    background: rgba(98, 200, 242, .14);
+}
+.ui-notif-icon svg { width: calc(.85 * var(--d11-u)); height: calc(.85 * var(--d11-u)); }
+
+.ui-notif-success { border-left-color: var(--ui-success); }
+.ui-notif-success .ui-notif-icon { color: var(--ui-success); background: var(--ui-success-light); }
+.ui-notif-error { border-left-color: var(--ui-error); }
+.ui-notif-error .ui-notif-icon { color: var(--ui-error); background: var(--ui-error-light); }
+.ui-notif-warning { border-left-color: var(--ui-warning); }
+.ui-notif-warning .ui-notif-icon { color: var(--ui-warning); background: var(--ui-warning-light); }
+.ui-notif-info .ui-notif-icon { color: var(--ui-info); background: rgba(98, 200, 242, .14); }

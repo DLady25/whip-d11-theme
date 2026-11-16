@@ -1,0 +1,108 @@
+/* ========================================
+   WHIP's menus in the D11 look: an opaque dark card (#101419), no glass; titles in italic upper-case Quantico,
+   small faded labels; chips, tabs and buttons as pills; the chosen one is a light pill with dark ink; blue only
+   as a detail. Every selector is scoped to a WHIP panel. The minimap and the pause map are not touched here.
+   ======================================== */
+
+:root {
+    --d11-card: #101419;
+    --d11-tile: #171C22;
+    --d11-neutral: rgba(235, 242, 237, 0.07);
+    --d11-sub: rgba(235, 242, 237, 0.68);
+    --d11-faint: rgba(235, 242, 237, 0.42);
+    --d11-shadow: 0 3px 12px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- titles: italic upper-case Quantico ---------- */
+.dt-title, .ds-title, .cs-name, .cs-play, .inv-panel-title, .inv-tooltip-name, .inv-basket-total,
+.pm-item, .pm-confirm-q, .pm-zone, .pm-legend-head, .ss-label, .ss-go,
+.ui-modal-title, .st-title, .st-ask-title, .pr-title, .pr-app-title {
+    font-family: var(--ui-font-display);
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+/* panels WHIP paints wholly in the title font: running text goes back to Geist */
+#creator, #emotes, #property-themes { font-family: var(--ui-font); }
+
+/* ---------- dialogs (input, alert, confirm) ---------- */
+#ui-input-overlay, #ui-alert-overlay { background: rgba(0, 0, 0, 0.3); }
+#ui-input-overlay .ui-modal, #ui-alert-overlay .ui-modal {
+    background: var(--d11-card);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: var(--d11-shadow);
+}
+.ui-modal-title { font-size: 18px; color: var(--ui-text); padding-top: 20px; }
+.ui-input-label {
+    font: italic 700 10px/1 var(--ui-font-display);
+    letter-spacing: 0.08em;
+    color: var(--d11-faint);
+}
+#ui-input-overlay .ui-input-el {
+    background: var(--d11-neutral);
+    border: 1px solid transparent;
+    border-radius: 6px;
+}
+#ui-input-overlay .ui-input-el:hover { background: rgba(235, 242, 237, 0.1); }
+#ui-input-overlay .ui-input-el:focus { border-color: var(--ui-accent); box-shadow: none; background: var(--d11-neutral); }
+#ui-input-overlay .ui-input-checkbox { border-radius: 4px; background: var(--d11-neutral); border-color: transparent; }
+#ui-input-overlay .ui-input-checkbox:checked { background: var(--ui-text); border-color: var(--ui-text); }
+#ui-input-overlay .ui-input-checkbox:checked::after { border-color: var(--d11-card); }
+/* pill buttons: confirm = light pill with dark ink */
+.ui-modal .ui-btn {
+    border-radius: 99px;
+    font: italic 700 12px/1 var(--ui-font-display);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 11px 22px;
+}
+.ui-modal .ui-btn-confirm { background: var(--ui-pill); color: var(--ui-pill-ink); box-shadow: none; }
+.ui-modal .ui-btn-confirm:hover { background: #fff; box-shadow: none; }
+.ui-modal .ui-btn-cancel { background: var(--d11-neutral); color: var(--d11-sub); }
+.ui-modal .ui-btn-cancel:hover { background: rgba(235, 242, 237, 0.12); color: var(--ui-text); }
+
+/* ---------- text on screen / progress bar (WHIP's drawtext) ---------- */
+.dt-title { font-size: 17px; letter-spacing: 0.03em; }
+.dt-bar { height: 3px; border-radius: 99px; background: rgba(235, 242, 237, 0.2); }
+.dt-bar span { border-radius: 99px; background: var(--ui-accent); }
+.dt-key {
+    border: 0;
+    border-radius: 99px;
+    background: var(--ui-text);
+    color: var(--d11-card);
+    font: italic 700 11px/1 var(--ui-font-display);
+}
+
+/* ---------- objectives (top right) ---------- */
+#ui-objectives { font-family: var(--ui-font); }
+
+/* ---------- pause: the menu column on a dark card, the chosen item with the blue edge ---------- */
+#pause .pm-side {
+    background: var(--d11-card);
+    border-right: 0;
+    box-shadow: 18px 0 48px rgba(0, 0, 0, 0.45);
+}
+#pause .pm-item { color: var(--d11-faint); font-size: calc(var(--pm-item) * 0.82); }
+#pause .pm-item.on { color: var(--ui-text); }
+#pause .pm-item::after { height: 5px; border-radius: 99px; background: var(--ui-accent); }
+#pause .pm-btn { border: 0; border-radius: 99px; background: var(--d11-neutral); font: italic 700 18px/1 var(--ui-font-display); text-transform: uppercase; letter-spacing: 0.04em; }
+#pause .pm-btn.on { background: var(--ui-pill); color: var(--ui-pill-ink); }
+#pause .pm-btn-danger.on { background: var(--ui-error); color: var(--d11-card); }
+#pause .pm-zone { color: var(--ui-text); }
+#pause :is(.pm-back, .pm-keys, .pm-legend) { background: var(--d11-card); border: 0; border-radius: 6px; box-shadow: var(--d11-shadow); }
+
+/* ---------- character select / spawn / death ---------- */
+#app .cs-name { letter-spacing: 0.02em; }
+#app .cs-play { border-radius: 99px; }
+.ds-title { letter-spacing: 0.04em; }
+
+/* ---------- radial menu: Quantico labels, the centre disc like the HUD's orbs ---------- */
+#ui-radial .rad-label { font: italic 700 var(--rad-label-fs, 12px)/1.2 var(--ui-font-display); text-transform: uppercase; letter-spacing: 0.04em; }
+#ui-radial .rad-icon-text { font-family: var(--ui-font-display); font-style: italic; }
+#ui-radial .rad-disc-core { background: var(--d11-card); box-shadow: none; }
+#ui-radial .rad-disc-ring { border-width: 4px; border-color: rgba(235, 242, 237, 0.22); box-shadow: 0 3px 12px rgba(0, 0, 0, 0.55); }
+#ui-radial .rad.chosen .rad-disc-ring { border-color: var(--ui-accent); box-shadow: 0 3px 12px rgba(0, 0, 0, 0.55), 0 0 10px rgba(0, 156, 228, 0.35); }
+#ui-radial .rad-pill { background: var(--d11-card); border: 0; box-shadow: var(--d11-shadow); }
+#ui-radial .rad-pill-name { font: italic 700 18px/1 var(--ui-font-display); text-transform: uppercase; letter-spacing: 0.04em; }

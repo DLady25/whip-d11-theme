@@ -1,0 +1,186 @@
+/* ========================================
+   WHIP's own inventory in the D11 look (dark). WHIP's layout (columns, grids, sizes) stays: the theme only
+   dresses it (whip_core docs/nui-theming.md, "What a theme cannot reach").
+   ======================================== */
+
+/* opaque cards, no glass or glow */
+#inv-overlay .inv-panel,
+#inv-overlay .inv-accessory-panel,
+#inv-overlay .inv-legend {
+    background: var(--d11-card);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: var(--d11-shadow);
+}
+
+/* header: name in italic Quantico, weight in a chip and a thin blue bar */
+#inv-overlay .inv-panel-title { font-size: 19px; color: var(--ui-text); }
+#inv-overlay .inv-col-center .inv-panel-title { font-size: 23px; }
+#inv-overlay .inv-weight .inv-panel-subtitle {
+    padding: 4px 9px;
+    border-radius: 99px;
+    background: var(--d11-neutral);
+    font: italic 700 11px/1 var(--ui-font-display);
+    letter-spacing: 0.04em;
+    color: var(--d11-sub);
+}
+#inv-overlay .inv-weight-bar { height: 3px; border-radius: 99px; background: rgba(235, 242, 237, 0.12); }
+#inv-overlay .inv-weight-fill { background: var(--ui-accent); }
+
+/* slots: a tile with no border, .4rem radius */
+#inv-overlay .inv-slot { border-color: transparent; }
+#inv-overlay .inv-slot.has-item { box-shadow: none; }
+
+/* slot number: a small light square with a dark figure */
+#inv-overlay .inv-slot-number,
+#inv-overlay #inv-player-grid .inv-slot-number {
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 4px;
+    background: var(--ui-text);
+    color: var(--d11-card);
+    font: italic 700 10px/1 var(--ui-font-display);
+}
+#inv-overlay .inv-slot:not(.has-item) .inv-slot-number { background: var(--d11-neutral); color: var(--d11-faint); }
+
+/* amount: a light chip, without WHIP's "x" */
+#inv-overlay .inv-slot-amount {
+    padding: 3px 7px;
+    border-radius: 99px;
+    background: var(--ui-text);
+    color: var(--d11-card);
+    font: italic 700 11px/1 var(--ui-font-display);
+    text-shadow: none;
+}
+#inv-overlay .inv-col-center .inv-slot-amount { font-size: 12px; right: 10px; bottom: 9px; }
+#inv-overlay .inv-col-center .inv-slot-amount:not(.money)::before { content: none; }
+/* name: Geist 600, no shadow */
+#inv-overlay .inv-slot-name {
+    font: 600 12px/1.2 var(--ui-font);
+    color: var(--ui-text);
+    opacity: 1;
+    text-shadow: none;
+}
+
+/* dragging: the target is the light pill (from the tokens), a refusal in red */
+#inv-overlay .inv-slot.drag-refuse { box-shadow: inset 0 0 0 2px var(--ui-error); }
+
+/* controls legend: keys in light pills */
+#inv-overlay .inv-legend { font-family: var(--ui-font); color: var(--d11-sub); }
+
+/* tooltip and right-click menu: dark card */
+.inv-tooltip .inv-pop, .inv-context-menu .inv-pop {
+    background: var(--d11-card);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: var(--d11-shadow);
+}
+.inv-tooltip-name { font-size: 15px; }
+
+/* ---------- quick-access bar (WHIP's #hotbar) ----------
+   At 1080p: a 620 x 82 dark card centred at the bottom, padding 8/10, gap 10; on the left the "QUICK ACCESS /
+   Keys 1-5" label; five 94 x 66 tiles with the key in a small square, the picture and the amount (WHIP puts no
+   item name on the bar). --d11-u is 1rem undoing #hotbar's zoom (--ui-scale x 1.25). */
+#hotbar, #ui-drawtext { --d11-u: calc(16px / (var(--ui-scale) * 1.25)); }
+
+#hotbar .hb-cap {
+    bottom: calc(1.5 * var(--d11-u));
+    display: flex;
+    align-items: center;
+    gap: calc(.625 * var(--d11-u));
+    padding: calc(.5 * var(--d11-u)) calc(.625 * var(--d11-u));
+    background: var(--d11-card);
+    border: 0;
+    border-radius: calc(.4 * var(--d11-u));
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .33), var(--d11-shadow);
+}
+/* the bar's label: title + "Keys 1-5" */
+#hotbar .hb-cap::before {
+    content: var(--d11-hotbar-title);
+    white-space: pre;
+    position: static;
+    display: block;
+    width: auto; height: auto;
+    background: none;
+    padding: 0 calc(.2 * var(--d11-u)) calc(.9 * var(--d11-u)) calc(.2 * var(--d11-u));
+    font: italic 700 calc(.8 * var(--d11-u))/1 var(--ui-font-display);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+    color: var(--ui-text);
+}
+#hotbar .hb-cap::after {
+    content: var(--d11-hotbar-keys);
+    position: absolute;
+    left: calc(.825 * var(--d11-u));
+    bottom: calc(.9 * var(--d11-u));
+    font: italic 700 calc(.56 * var(--d11-u))/1 var(--ui-font-display);
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--d11-faint);
+}
+html[data-input="pad"].pad-hints-up #hotbar .hb-cap { bottom: calc(4.6 * var(--d11-u)); }
+
+.hb-seg { gap: calc(.375 * var(--d11-u)); }
+
+/* the tile, in place of WHIP's disc */
+.hb-slot {
+    width: calc(5.875 * var(--d11-u));
+    height: calc(4.125 * var(--d11-u));
+    border-radius: calc(.4 * var(--d11-u));
+    background: var(--d11-tile);
+}
+.hb-slot.empty { background: var(--d11-neutral); }
+.hb-slot::after { inset: 0; border: 0; border-radius: inherit; box-shadow: none; }
+.hb-slot.active::after { box-shadow: inset 0 0 0 2px var(--ui-accent); }
+.hb-core { inset: 0; border-radius: inherit; background: none; box-shadow: none; }
+.hb-slot.active .hb-core::before { background: rgba(0, 156, 228, .12); }
+.hb-img {
+    max-width: 62%;
+    max-height: 62%;
+    margin-top: calc(.3 * var(--d11-u));
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, .55));
+}
+/* key: a small square in the top corner */
+.hb-key {
+    left: calc(.35 * var(--d11-u));
+    top: calc(.35 * var(--d11-u));
+    bottom: auto;
+    min-width: calc(1.06 * var(--d11-u));
+    height: calc(1.06 * var(--d11-u));
+    padding: 0 calc(.2 * var(--d11-u));
+    border: 0;
+    border-radius: calc(.25 * var(--d11-u));
+    background: var(--d11-neutral);
+    color: var(--d11-sub);
+    font: italic 700 calc(.66 * var(--d11-u))/1 var(--ui-font-display);
+}
+.hb-slot:not(.empty) .hb-key { background: var(--ui-text); color: var(--d11-card); }
+.hb-slot.active .hb-key { background: var(--ui-accent); color: #fff; }
+/* amount: a light chip in the opposite corner */
+.hb-count {
+    right: calc(.35 * var(--d11-u));
+    top: calc(.35 * var(--d11-u));
+    height: calc(1.06 * var(--d11-u));
+    padding: 0 calc(.35 * var(--d11-u));
+    border: 0;
+    border-radius: 99px;
+    background: var(--ui-text);
+    color: var(--d11-card);
+    font: italic 700 calc(.66 * var(--d11-u))/1 var(--ui-font-display);
+    font-variant-numeric: tabular-nums;
+    box-shadow: none;
+}
+.hb-count:not(.money)::before { content: none; }
+.hb-count:not(.money)::after { content: 'x'; }
+
+/* inside the hint capsule (the bar joins it when there is a hint below) */
+#ui-drawtext .hb-div { height: calc(3 * var(--d11-u)); background: var(--d11-line, rgba(235, 242, 237, .16)); }
+#ui-drawtext .hb-seg.open { max-width: calc(36 * var(--d11-u)); }   /* the tiles are wider than the discs */
+
+/* no darkening behind the inventory (#inv-wash, WHIP's scrim): the game stays as it is. */
+#inv-wash, #inv-wash.on { display: none; }

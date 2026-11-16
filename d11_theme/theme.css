@@ -1,0 +1,150 @@
+/* ========================================
+   D11 THEME for WHIP: the dark D11 look. Redeclares only whip_core's tokens (html/css/base.css, the theme
+   contract in whip_core docs/nui-theming.md) and imports one layer per screen, each scoped to its WHIP panel.
+   CSS that CEF 103 (the game's browser) runs: plain rgba, no color-mix().
+   Base: ink #101419 = rgb(16,20,25) | text #EBF2ED = rgb(235,242,237) | accent #009CE4 = rgb(0,156,228)
+   ======================================== */
+
+/* The layers, one per screen (selectors scoped to each panel; the tokens below apply to everything).
+   ?v=N: FiveM's NUI caches CSS by its address; raise N when a layer changes. */
+/* The HUD layer comes from d11_hud (round minimap, rev dial and status gauges): with d11_hud started it applies,
+   without it the import fails quietly and WHIP's own HUD stays. Keeping WHIP's health gauges with d11_hud
+   (its Status = false)? Delete the status.css line. */
+@import url('https://cfx-nui-d11_hud/whip/hud.css?v=3');
+@import url('https://cfx-nui-d11_hud/whip/status.css?v=3');
+@import url('css/menus.css?v=4');
+@import url('css/inventory.css?v=7');
+@import url('css/notify.css?v=2');
+@import url('css/creator.css?v=3');
+
+/* Fonts (SIL Open Font License), relative to theme.css (https://cfx-nui-<this resource>/). */
+@font-face {
+    font-family: 'D11 Text';
+    src: url('fonts/Geist-Medium.woff2') format('woff2');
+    font-weight: 400 800;
+    font-display: block;
+}
+@font-face {
+    font-family: 'D11 Display';
+    src: url('fonts/Quantico-Bold.ttf') format('truetype');
+    font-weight: 400 900;
+    font-display: block;
+}
+
+:root {
+    /* ---- the theme's own words (CSS has no translation: edit them here). pt-BR: 'Acesso\A rápido', 'Teclas 1–5' ---- */
+    --d11-hotbar-title: 'Quick\A access';
+    --d11-hotbar-keys:  'Keys 1–5';
+
+    /* ---- surfaces: dark card, no glass ---- */
+    --ui-surface:        rgba(16, 20, 25, 0.88);
+    --ui-surface-raised: rgba(16, 20, 25, 0.97);
+    --ui-surface-solid:  rgb(16, 20, 25);
+    --ui-surface-hover:  rgba(235, 242, 237, 0.07);
+    --ui-surface-hover-strong: rgba(235, 242, 237, 0.12);
+    --ui-surface-subtle: rgba(235, 242, 237, 0.02);
+    --ui-surface-light:  rgba(235, 242, 237, 0.03);
+    --ui-surface-medium: rgba(235, 242, 237, 0.05);
+
+    /* ---- borders ---- */
+    --ui-border:       rgba(235, 242, 237, 0.10);
+    --ui-border-hover: rgba(235, 242, 237, 0.16);
+
+    /* ---- shadows: flat, no inner glow ---- */
+    --ui-shadow:       0 3px 12px rgba(0, 0, 0, 0.55);
+    --ui-shadow-lg:    0 6px 20px rgba(0, 0, 0, 0.6);
+    --ui-shadow-modal: 0 16px 48px rgba(0, 0, 0, 0.65);
+    --ui-shadow-text:  0 1px 2px rgba(0, 0, 0, 0.6);
+    --ui-rim:          0 2px 4px rgba(0, 0, 0, 0.55);
+
+    /* ---- radii: .4rem cards, pill chips ---- */
+    --ui-radius-panel: 6px;
+    --ui-radius-pop:   6px;
+    --ui-radius-row:   6px;
+    --ui-radius-slot:  5px;
+    --ui-radius-sm:    5px;
+    --ui-radius-xs:    4px;
+    --ui-radius-pill:  99px;
+    --ui-radius-hair:  99px;
+    --ui-radius-capsule: 99px;
+
+    /* ---- text ---- */
+    --ui-text:       #EBF2ED;
+    --ui-text-mid:   rgba(235, 242, 237, 0.68);
+    --ui-text-dim:   rgba(235, 242, 237, 0.42);
+    --ui-text-label: rgba(235, 242, 237, 0.55);
+
+    /* ---- semantic colours ---- */
+    --ui-accent:         #009CE4;
+    --ui-accent-glow:    rgba(0, 156, 228, 0.22);
+    --ui-accent-subtle:  rgba(0, 156, 228, 0.07);
+    --ui-accent-light:   rgba(0, 156, 228, 0.16);
+    --ui-accent-medium:  rgba(0, 156, 228, 0.28);
+    --ui-on-accent:      #fff;
+    --ui-success:        #8fd3a8;
+    --ui-success-subtle: rgba(143, 211, 168, 0.08);
+    --ui-success-light:  rgba(143, 211, 168, 0.14);
+    --ui-success-medium: rgba(143, 211, 168, 0.5);
+    --ui-error:          #ef655b;
+    --ui-error-subtle:   rgba(239, 101, 91, 0.08);
+    --ui-error-light:    rgba(239, 101, 91, 0.14);
+    --ui-warning:        #e7c779;
+    --ui-warning-light:  rgba(231, 199, 121, 0.14);
+    --ui-info:           #62c8f2;
+
+    /* ---- death screen ---- */
+    --ui-death-curtain: linear-gradient(to top, rgba(96, 22, 18, 0.88) 0%, rgba(96, 22, 18, 0.58) 40%, rgba(96, 22, 18, 0) 100%);
+    --ui-death-track:   rgba(235, 242, 237, 0.2);
+
+    /* ---- skill check ---- */
+    --ui-skill-target:  #009CE4;
+    --ui-skill-fill:    #7fd4ff;
+    --ui-skill-full:    #ffffff;
+    --ui-skill-done:    #d9f1ff;
+    --ui-skill-edge:    rgba(16, 20, 25, 0.6);
+    --ui-skill-outline: rgba(235, 242, 237, 0.5);
+    --ui-skill-clock:   rgba(235, 242, 237, 0.85);
+
+    /* ---- slots: empty = a light veil, filled = the dark tile, no border ---- */
+    --ui-slot-bg:          rgba(235, 242, 237, 0.07);
+    --ui-slot-bg-filled:   #171C22;
+    --ui-slot-bg-hover:    #1F262E;
+    --ui-slot-bg-chosen:   rgba(0, 156, 228, 0.16);
+    --ui-ring:             rgba(235, 242, 237, 0.65);
+    --ui-slot-line:        transparent;
+    --ui-slot-line-filled: transparent;
+    --ui-slot-line-hover:  rgba(235, 242, 237, 0.16);
+    --ui-slot-line-focus:  #009CE4;                   /* blue only as a detail (the chosen one's edge) */
+    --ui-slot-lift:        none;
+    --ui-slot-glow:        0 0 10px rgba(0, 156, 228, 0.35);
+
+    /* ---- selection pill: the active tab is a light pill with dark ink ---- */
+    --ui-pill:         #EBF2ED;
+    --ui-pill-ink:     #101419;
+    --ui-pill-ink-mid: rgba(16, 20, 25, 0.72);
+    --ui-pill-hover:   #fff;
+
+    /* ---- backgrounds ---- */
+    --ui-scrim:      rgba(16, 20, 25, 0.6);
+    --ui-panel-glow: none;
+
+    /* ---- item art ---- */
+    --ui-item-shadow:        drop-shadow(0 2px 4px rgba(0, 0, 0, 0.55));
+    --ui-item-shadow-lifted: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.6));
+
+    /* ---- type ---- */
+    --ui-font:         'D11 Text', 'Geist', 'Segoe UI', sans-serif;
+    --ui-mono:         var(--ui-font);
+    --ui-font-display: 'D11 Display', 'Quantico', 'Arial Narrow', var(--ui-font);
+    --ui-fw-display:   700;                        /* Quantico so tem Bold */
+
+    /* ---- scrollbars ---- */
+    --ui-scrollbar-thumb:             rgba(235, 242, 237, 0.10);
+    --ui-scrollbar-thumb-hover:       rgba(235, 242, 237, 0.18);
+    --ui-scrollbar-thumb-reach:       rgba(235, 242, 237, 0.18);
+    --ui-scrollbar-thumb-reach-hover: rgba(235, 242, 237, 0.30);
+
+    /* ---- native <option> ---- */
+    --ui-select-option-bg: #101419;
+    --ui-select-option-fg: #EBF2ED;
+}

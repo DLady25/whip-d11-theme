@@ -1,0 +1,312 @@
+/* The character editor in the D11 look. Only overrides whip_core's css/creator.css, through #creator
+   selectors. Sizes in .cr-scale px (on screen at 1080p: x1.125). */
+
+#creator {
+    --cr-left-w: 392px;            /* the column; the stage (camera) takes the rest by itself */
+    --cr-gap: 8px;
+    --cr-card: var(--ui-surface-solid, rgb(16, 20, 25));
+    --cr-tile: #171C22;
+    --cr-tile-hover: #1F262E;
+    --cr-line: rgba(235, 242, 237, 0.10);
+}
+
+/* ---- the column: loose cards over the world, no glass ---- */
+#creator .cr-left {
+    flex: 0 0 var(--cr-left-w);
+    height: calc(100% - 92px);
+    margin: 20px 0 0 20px;
+    padding: 0;
+    gap: var(--cr-gap);
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+
+/* Header: a card with the title in italic upper-case Quantico and the line under it. */
+#creator .cr-head {
+    gap: 10px;
+    padding: 0;
+    background: none;
+}
+#creator .cr-title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 11px 14px 12px;
+    background: var(--cr-card);
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-title-name {
+    font-family: var(--ui-font-display);
+    font-style: italic;
+    font-size: 19px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+}
+#creator .cr-title-sub { font-size: 11.5px; color: var(--ui-text-mid); }
+
+/* Groups (Face, Clothes...): dark pills; the chosen one is the light pill. */
+#creator #cr-groups {
+    display: flex;
+    gap: 6px;
+    width: 100%;
+    margin: 0;
+}
+#creator .cr-group {
+    flex: 1 1 0;
+    padding: 8px 0 7px;
+    font-size: 11px;
+    font-style: italic;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-align: center;
+    color: var(--ui-text-mid);
+    background: var(--cr-card);
+    border-radius: 99px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-group:hover { color: var(--ui-text); background: var(--cr-tile-hover); }
+#creator .cr-group.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+#creator .cr-group::after, #creator .cr-tab::after { display: none; }
+
+/* Categories: a card with the blue edge on the left and chips. */
+#creator #cr-rail {
+    margin: 0;
+    padding: 10px 12px 10px 15px;
+    column-gap: 5px;
+    row-gap: 5px;
+    background: var(--cr-card);
+    border: 0;
+    border-left: 3px solid var(--ui-accent);
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-tab {
+    padding: 5px 11px;
+    font-family: var(--ui-font);
+    font-size: 11.5px;
+    font-weight: var(--ui-fw-semibold);
+    color: var(--ui-text-mid);
+    background: rgba(235, 242, 237, 0.05);
+    border-radius: 99px;
+}
+#creator .cr-tab:hover { color: var(--ui-text); background: rgba(235, 242, 237, 0.10); }
+#creator .cr-tab.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+
+#creator #cr-subtabs { margin: 0; }
+#creator .cr-subtab { padding: 6px 13px; font-size: 11.5px; background: var(--cr-card); box-shadow: var(--ui-shadow); }
+#creator .cr-subtab:hover { background: var(--cr-tile-hover); }
+#creator .cr-subtab.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+
+/* The chosen piece: a card on the RIGHT of the screen, with the photo, the name and the colours. The column is
+   no longer the positioning reference (static), so the card anchors on .cr-scale, like the footer. The stage
+   (drag and camera centre) stops before the card, and the character stands between the column and the card. */
+#creator .cr-left { position: static; }
+#creator #cr-stage { margin-right: calc(var(--cr-left-w) + 20px); }
+#creator #cr-options {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: var(--cr-left-w);
+    box-sizing: border-box;
+    max-height: calc(100% - 40px);
+    margin: 0;
+    padding: 12px;
+    background: var(--cr-card);
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+}
+/* Photo and name on top; the piece's colours across the whole card just below (.cr-band-main leaves the box
+   with display: contents, and title, collection, count and colours become grid cells). */
+#creator .cr-band-top {
+    display: grid;
+    grid-template-columns: 118px minmax(0, 1fr);
+    grid-auto-rows: auto;
+    column-gap: 14px;
+    align-content: start;
+}
+#creator .cr-band-main { display: contents; }
+#creator .cr-hero {
+    grid-column: 1;
+    grid-row: 1 / span 3;
+    width: 118px;
+    height: 118px;
+    background: var(--cr-tile);
+    border: 0;
+    border-radius: 5px;
+}
+#creator .cr-hero .cr-icon { inset: 8px; width: calc(100% - 16px); height: calc(100% - 16px); }
+#creator .cr-band-title, #creator .cr-band-sub, #creator .cr-band-meta { grid-column: 2; }
+#creator .cr-band-top > .cr-band-main > .cr-band-title:only-child { grid-column: 1 / -1; }
+#creator .cr-band-meta { align-self: end; }
+#creator .cr-band-body {
+    grid-column: 1 / -1;
+    max-height: 520px;
+    margin: 10px -4px 0;
+}
+#creator .cr-band-body:empty { display: none; }
+#creator .cr-band-top > .cr-band-main:first-child .cr-band-body { margin-top: 6px; }
+
+/* The colours: tiles with each colour's photo, six per row. */
+#creator .cr-texrow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
+#creator .cr-tex { min-width: 0; padding: 7px 0; border-radius: 5px; color: var(--ui-text-mid); }
+#creator .cr-tex-pic { position: relative; height: auto; aspect-ratio: 1; padding: 0; }
+#creator .cr-tex-pic .cr-tex-num {
+    position: absolute; left: 4px; bottom: 3px; font-size: 9.5px; color: var(--ui-text-dim);
+}
+#creator .cr-tex-pic.has-icon .cr-tex-num { visibility: visible; }
+#creator .cr-tex-more { grid-column: span 2; display: flex; align-items: center; justify-content: center; gap: 5px;
+    font-size: 10.5px; aspect-ratio: auto; }
+#creator .cr-band-title {
+    font-size: 20px;
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+#creator .cr-band-title.small { font-size: 16px; }
+#creator .cr-band-sub { margin-top: 4px; font-size: 11.5px; }
+#creator .cr-band-meta { padding-top: 8px; font-size: 10.5px; }
+#creator .cr-opt-label { margin: 9px 0 5px; font-size: 11px; }
+
+/* The photo grid: three per row, dark tiles, the chosen one with a blue ring. */
+#creator #cr-grid {
+    margin: 0;
+    padding: 10px;
+    gap: 8px;
+    background: var(--cr-card);
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-card {
+    flex: 0 0 calc((100% - 16px) / 3);
+    height: 118px;
+    background: var(--cr-tile);
+    border: 0;
+    border-radius: 5px;
+}
+#creator .cr-card:hover { background: var(--cr-tile-hover); }
+#creator .cr-card-num { left: 8px; bottom: 7px; font-size: 10.5px; color: var(--ui-text-dim); text-shadow: none; }
+#creator .cr-card.selected,
+#creator .cr-card.selected:hover {
+    background: var(--cr-tile-hover);
+    border: 0;
+    box-shadow: inset 0 0 0 1.5px var(--ui-accent), 0 0 0 1px rgba(0, 156, 228, 0.25);
+}
+#creator .cr-card.selected .cr-card-num { color: var(--ui-accent); }
+
+#creator .cr-tex, #creator .cr-tex-pic, #creator .cr-tex-more { background: var(--cr-tile); border: 0; }
+#creator .cr-tex.selected, #creator .cr-tex-pic.selected { box-shadow: inset 0 0 0 1.5px var(--ui-accent); background: var(--cr-tile-hover); color: var(--ui-text); }
+
+/* Column footer (shortcuts + undress): its own card. */
+#creator .cr-left-foot {
+    margin: 0;
+    padding: 9px 12px;
+    background: var(--cr-card);
+    border: 0;
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-hints { font-size: 10.5px; gap: 4px 12px; }
+#creator .cr-key { background: var(--cr-tile); border-color: var(--cr-line); }
+
+/* Cancel / Save: under the column, pills (Save = a wide light pill). */
+#creator .cr-footer {
+    left: 20px;
+    right: auto;
+    width: var(--cr-left-w);
+    padding: 0 0 20px;
+}
+#creator .cr-footer .cr-btns { width: 100%; gap: 8px; }
+#creator .cr-btn {
+    flex: 1 1 0;
+    height: 38px;
+    font-family: var(--ui-font-display);
+    font-style: italic;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    background: var(--cr-card);
+    border: 0;
+    border-radius: 99px;
+    text-shadow: none;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-btn:hover { background: var(--cr-tile-hover); }
+#creator .cr-btn-primary { flex: 2 1 0; background: var(--ui-pill); color: var(--ui-pill-ink); }
+#creator .cr-btn-primary:hover { background: #fff; }
+
+/* ---- Store cart (d11_lojas, with its whip_core appearance-policy patch): bottom right, under the piece card ---- */
+#creator.has-cart #cr-options { max-height: calc(48% - 30px); overflow: hidden; }
+#creator.has-cart .cr-band-body { max-height: 190px; }
+
+#creator #cr-cart {
+    display: none;
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: var(--cr-left-w);
+    max-height: calc(52% - 20px);
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    background: var(--cr-card);
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+    animation: cr-rise 0.3s var(--ui-ease);
+}
+#creator #cr-cart.open { display: flex; }
+#creator .cr-cart-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; }
+#creator .cr-cart-title {
+    font-family: var(--ui-font-display); font-style: italic; font-weight: 700; font-size: 19px;
+    text-transform: uppercase; letter-spacing: 0.01em; color: var(--ui-text);
+}
+#creator .cr-cart-sub { font-size: 11px; color: var(--ui-text-mid); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#creator .cr-cart-list { flex: 1 1 auto; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+#creator .cr-cart-row {
+    display: flex; align-items: center; gap: 8px; padding: 7px 8px 7px 11px;
+    background: var(--cr-tile); border-radius: 5px; border-left: 2px solid var(--ui-accent);
+}
+#creator .cr-cart-label { flex: 1 1 auto; min-width: 0; font-size: 12px; color: var(--ui-text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#creator .cr-cart-price { flex: 0 0 auto; font-size: 12px; font-weight: var(--ui-fw-bold); font-variant-numeric: tabular-nums; }
+#creator .cr-cart-price.free { color: var(--ui-text-dim); font-weight: var(--ui-fw-medium); }
+#creator .cr-cart-x {
+    flex: 0 0 auto; width: 22px; height: 22px; padding: 0; border: 0; border-radius: 99px; cursor: pointer;
+    font-size: 15px; line-height: 22px; color: var(--ui-text-mid); background: rgba(235, 242, 237, 0.06);
+}
+#creator .cr-cart-x:hover { color: rgb(16, 20, 25); background: var(--ui-error); }
+#creator .cr-cart-empty { padding: 14px 4px; font-size: 11.5px; color: var(--ui-text-dim); text-align: center; }
+#creator .cr-cart-total {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 8px; border-top: 1px solid var(--cr-line); font-size: 12px; color: var(--ui-text-mid);
+}
+#creator .cr-cart-total b { font-family: var(--ui-font-display); font-style: italic; font-size: 20px; color: var(--ui-text); }
+#creator .cr-cart-pays { display: flex; gap: 6px; }
+#creator .cr-cart-pay {
+    flex: 1 1 0; display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 7px 11px;
+    border: 0; border-radius: 5px; cursor: pointer; text-align: left;
+    background: var(--cr-tile); color: var(--ui-text-mid); font: inherit;
+}
+#creator .cr-cart-pay span { font-size: 12px; font-weight: var(--ui-fw-semibold); color: var(--ui-text); }
+#creator .cr-cart-pay small { font-size: 10.5px; font-variant-numeric: tabular-nums; }
+#creator .cr-cart-pay:hover { background: var(--cr-tile-hover); }
+#creator .cr-cart-pay.on { box-shadow: inset 0 0 0 1.5px var(--ui-accent); background: var(--cr-tile-hover); }
+#creator .cr-cart-pay:disabled { opacity: 0.4; cursor: default; }
+#creator .cr-cart-why { font-size: 11px; color: var(--ui-error); }
+#creator .cr-cart-buy {
+    height: 38px; border: 0; border-radius: 99px; cursor: pointer;
+    font-family: var(--ui-font-display); font-style: italic; font-weight: 700; font-size: 13px;
+    text-transform: uppercase; letter-spacing: 0.03em;
+    background: var(--ui-pill); color: var(--ui-pill-ink); box-shadow: var(--ui-shadow);
+}
+#creator .cr-cart-buy:hover { background: #fff; }
+#creator .cr-cart-buy:disabled { opacity: 0.45; cursor: default; }
+
+/* In a store the cart has "Confirm purchase": the footer's Save goes (creator.js) and Cancel takes the row. */
+#creator.has-cart .cr-footer .cr-btn { flex: 1 1 auto; }
