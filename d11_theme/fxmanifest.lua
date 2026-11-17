@@ -5,7 +5,7 @@ lua54 'yes'
 name 'd11_theme'
 description 'D11 Theme for WHIP: the dark D11 look for WHIP menus, inventory, notifications and character editor; with d11_hud, its HUD layer too.'
 author 'District 11 (D11)'
-version '1.0.0'
+version '1.0.1'
 repository 'https://github.com/DLady25/whip-d11-theme'
 
 dependency 'whip_core'

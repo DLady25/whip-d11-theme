@@ -14,9 +14,10 @@ detail back to WHIP's base look.
 | `css/notify.css` | The top-right notifications. |
 | `css/creator.css` | The character editor: a column of cards on the left, the chosen piece on a card on the right, 3-per-row photo grid. |
 
-**With [d11_hud](https://github.com/DLady25/whip-d11-hud)** the theme also loads d11_hud's layer for WHIP's page
-(round minimap under the radar ring, rev dial and status gauges hidden, voice as a circle). Without d11_hud that import
-fails quietly and WHIP's own HUD stays, so the theme works on its own too.
+**With [d11_hud](https://github.com/DLady25/whip-d11-hud)**, uncomment its two `@import` lines at the top of
+`theme.css` (round minimap under the radar ring, rev dial and status gauges hidden, voice as a circle). They ship
+commented out: an `@import` from a resource that is not installed makes whip_core drop the whole theme
+("theme.css could not be loaded ... Falling back to the base look"), so the theme works on its own by default.
 
 > Replaces `whip_theme_d12` from the old D11 Starter Kit. Remove that one (and its `whip_d12_hud`) before installing.
 
@@ -37,7 +38,7 @@ The server console says `[d11_theme] on` when it is applied.
 
 ## Options
 
-- **Keep WHIP's health gauges with d11_hud** (d11_hud's `Status = false`): delete the `whip/status.css` line in
+- **Keep WHIP's health gauges with d11_hud** (d11_hud's `Status = false`): uncomment only the `whip/hud.css` line in
   `theme.css`.
 - **The quick-access bar's label** is CSS text: `--d11-hotbar-title` and `--d11-hotbar-keys` at the top of `theme.css`
   (English by default; the Portuguese is in the comment next to them).
