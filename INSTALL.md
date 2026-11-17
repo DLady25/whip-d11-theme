@@ -2,16 +2,17 @@
 
 **English** · [Português](#português)
 
-Four packages, made and tested together on a stock **whip_core 1.2.0**:
+Five packages, made and tested together on a stock **whip_core 1.2.0**:
 
 | Package | Version | What it is |
 | --- | --- | --- |
-| `whip-d11-inventory` | 2.0.0 | Inventory renderer, bags, weapon attachments, physical trunk and ground |
+| `whip-d11-inventory` | 2.0.1 | Inventory renderer, bags, weapon attachments, physical trunk and ground |
 | `whip-d11-clothing` | 1.1.0 | Clothing stores, clothes as items, our character editor, outfit photos |
 | `whip-d11-hud` | 1.1.0 | HUD: status, speedometer, turbo/nitrous, seatbelt, radar, ammo |
 | `whip-d11-theme` | 1.1.0 | The D11 look for WHIP's own screens |
+| `whip-d11-map` | 1.0.0 | Pause map: places panel, day/night theme, street and district names |
 
-`D11-for-WHIP-1.2.0-all.zip` holds all four; each one also comes as its own zip. Every package has a `README.md` with
+`D11-for-WHIP-1.2.0-all.zip` holds all of them; each one also comes as its own zip. Every package has a `README.md` with
 the details. This file is the short path.
 
 ## 1. Before you start
@@ -31,6 +32,7 @@ Unzip the package(s). From inside each package folder, copy into your `resources
 | `whip-d11-clothing/` | `[d11-clothing]` |
 | `whip-d11-hud/` | `d11_hud` |
 | `whip-d11-theme/` | `d11_theme` |
+| `whip-d11-map/` | `d11_mapnomes` |
 
 Running the old D11 Starter Kit? Remove `whip_theme_d12` and `whip_d12_hud` first.
 
@@ -69,6 +71,7 @@ patch -p1 < "$P/whip_core-item-prop-resolver-d11.patch"
 patch -p1 < "$P/whip_core-item-prop-amount-d11.patch"
 patch -p1 < "$D11/whip-d11-hud/whip_core-patches/whip_core-vehicle-stat-reading-d11.patch"
 patch -p1 < "$D11/whip-d11-clothing/whip_core-patches/whip_core-creator-d11.patch"
+patch -p1 < "$D11/whip-d11-map/whip_core-patches/whip_core-map-d11.patch"
 ```
 
 If a patch says `Reversed (or previously applied) patch detected` or a hunk fails, answer **n**, stop, and put your
@@ -105,6 +108,7 @@ ensure d11_clothing
 ensure d11_stores
 ensure d11_wardrobe
 ensure d11_photostudio
+ensure d11_mapnomes
 ```
 
 `d11_inventory` **must** come before `d11_ptrunk`. The theme and the HUD sort themselves out in any order (if d11_hud
@@ -139,21 +143,25 @@ The bag items were renamed in 2.0. With the server **stopped**, run
 - **Clothing stores**: in game at `/whip` → Settings → Clothing stores.
   Pressing a store's prompt shows a notice and opens the editor **3 seconds** later, so the player can stand in the
   open: `Config.OpenDelay` in `d11_stores/config.lua` (0 opens at once).
+- **Map theme**: players switch Auto/Day/Night in the map's panel. `setr d11_map_theme_auto_only 1` puts everyone on
+  Auto (follows the game clock) and hides the button. Added roads? `/d11mapnomes` in game, then
+  `restart d11_mapnomes` (see the map's README).
 
 ---
 
 ## Português
 
-Quatro pacotes, feitos e testados juntos num **whip_core 1.2.0** de fábrica:
+Cinco pacotes, feitos e testados juntos num **whip_core 1.2.0** de fábrica:
 
 | Pacote | Versão | O que é |
 | --- | --- | --- |
-| `whip-d11-inventory` | 2.0.0 | Inventário, bolsas, acessórios de arma, porta-malas e chão físicos |
+| `whip-d11-inventory` | 2.0.1 | Inventário, bolsas, acessórios de arma, porta-malas e chão físicos |
 | `whip-d11-clothing` | 1.1.0 | Lojas de roupa, roupas como itens, nosso editor de personagem, fotos do visual |
 | `whip-d11-hud` | 1.1.0 | HUD: status, velocímetro, turbo/nitro, cinto, radar, munição |
 | `whip-d11-theme` | 1.1.0 | O visual D11 nas telas do próprio WHIP |
+| `whip-d11-map` | 1.0.0 | Mapa do pause: painel de locais, tema dia/noite, nomes de ruas e bairros |
 
-O `D11-for-WHIP-1.2.0-all.zip` traz os quatro; cada um também vem num zip próprio. Cada pacote tem um `README.md` com
+O `D11-for-WHIP-1.2.0-all.zip` traz todos; cada um também vem num zip próprio. Cada pacote tem um `README.md` com
 os detalhes. Este arquivo é o caminho curto.
 
 ## 1. Antes de começar
@@ -173,6 +181,7 @@ Descompacte o(s) pacote(s). De dentro de cada pasta de pacote, copie para o seu 
 | `whip-d11-clothing/` | `[d11-clothing]` |
 | `whip-d11-hud/` | `d11_hud` |
 | `whip-d11-theme/` | `d11_theme` |
+| `whip-d11-map/` | `d11_mapnomes` |
 
 Usa o antigo D11 Starter Kit? Remova antes o `whip_theme_d12` e o `whip_d12_hud`.
 
@@ -211,6 +220,7 @@ patch -p1 < "$P/whip_core-item-prop-resolver-d11.patch"
 patch -p1 < "$P/whip_core-item-prop-amount-d11.patch"
 patch -p1 < "$D11/whip-d11-hud/whip_core-patches/whip_core-vehicle-stat-reading-d11.patch"
 patch -p1 < "$D11/whip-d11-clothing/whip_core-patches/whip_core-creator-d11.patch"
+patch -p1 < "$D11/whip-d11-map/whip_core-patches/whip_core-map-d11.patch"
 ```
 
 Se um patch disser `Reversed (or previously applied) patch detected` ou um trecho falhar, responda **n**, pare e
@@ -247,6 +257,7 @@ ensure d11_clothing
 ensure d11_stores
 ensure d11_wardrobe
 ensure d11_photostudio
+ensure d11_mapnomes
 ```
 
 O `d11_inventory` **tem que** vir antes do `d11_ptrunk`. Tema e HUD se acertam sozinhos em qualquer ordem (se o d11_hud
@@ -281,3 +292,6 @@ Os itens de bolsa mudaram de nome na 2.0. Com o servidor **parado**, rode uma ve
 - **Lojas de roupa**: no jogo, em `/whip` → Settings → Clothing stores.
   Ao interagir com a loja aparece um aviso e o editor abre **3 segundos** depois, para o jogador se posicionar num
   espaço livre: `Config.OpenDelay` no `d11_stores/config.lua` (0 abre na hora).
+- **Tema do mapa**: o jogador troca Auto/Dia/Noite no painel do mapa. `setr d11_map_theme_auto_only 1` deixa todos no
+  Auto (segue o relógio do jogo) e some com o botão. Ruas novas? `/d11mapnomes` no jogo, depois
+  `restart d11_mapnomes` (ver o README do mapa).
