@@ -1,5 +1,8 @@
 # D11 Theme for WHIP
 
+> **Installing?** Follow [INSTALL.md](INSTALL.md) (English and Português): the whole D11 set on a stock whip_core
+> 1.2.0, step by step, with the patch order, server.cfg and what to check in the console.
+
 The look we run on District 11 (D11), as a [WHIP](https://github.com/WHIPFX/whip_core) theme: dark opaque cards, no
 glass, italic Quantico titles, pill chips and buttons, blue only as a detail. It redeclares whip_core's tokens
 (`html/css/base.css`, the theme contract in whip_core's `docs/nui-theming.md`) and adds one layer per screen, each
