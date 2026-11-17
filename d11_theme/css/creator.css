@@ -1,8 +1,10 @@
-/* The character editor in the D11 look. Only overrides whip_core's css/creator.css, through #creator
-   selectors. Sizes in .cr-scale px (on screen at 1080p: x1.125). */
+/* Editor de personagem no visual D12 (referência: qf_skinmenu_v2 escuro da VPS, release qf-d12-theme-dark-20261111).
+   Só sobrescreve o css/creator.css do whip_core por seletores #creator. Medidas em px do .cr-scale
+   (na tela, 1080p: x1,125). Prévia: themes/_creator (porta 5318). O #creator é da
+   sessão de roupas/skin. Importado pelo theme.css com ?v=N: suba o N a cada mudança. */
 
 #creator {
-    --cr-left-w: 392px;            /* the column; the stage (camera) takes the rest by itself */
+    --cr-left-w: 392px;            /* a coluna; o palco (câmera) mede o resto sozinho */
     --cr-gap: 8px;
     --cr-card: var(--ui-surface-solid, rgb(16, 20, 25));
     --cr-tile: #171C22;
@@ -10,7 +12,7 @@
     --cr-line: rgba(235, 242, 237, 0.10);
 }
 
-/* ---- the column: loose cards over the world, no glass ---- */
+/* ---- a coluna: cartões soltos sobre o mundo, sem vidro ---- */
 #creator .cr-left {
     flex: 0 0 var(--cr-left-w);
     height: calc(100% - 92px);
@@ -22,7 +24,7 @@
     box-shadow: none;
 }
 
-/* Header: a card with the title in italic upper-case Quantico and the line under it. */
+/* Cabeçalho: cartão com título Quantico itálico em caixa alta e a linha de apoio embaixo. */
 #creator .cr-head {
     gap: 10px;
     padding: 0;
@@ -49,7 +51,7 @@
 }
 #creator .cr-title-sub { font-size: 11.5px; color: var(--ui-text-mid); }
 
-/* Groups (Face, Clothes...): dark pills; the chosen one is the light pill. */
+/* Grupos (Rosto, Roupas...): pílulas escuras; a escolhida é a pílula clara, como os ícones do QF. */
 #creator #cr-groups {
     display: flex;
     gap: 6px;
@@ -73,7 +75,7 @@
 #creator .cr-group.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
 #creator .cr-group::after, #creator .cr-tab::after { display: none; }
 
-/* Categories: a card with the blue edge on the left and chips. */
+/* Categorias: um cartão com a faixa azul à esquerda (seção aberta do QF) e chips. */
 #creator #cr-rail {
     margin: 0;
     padding: 10px 12px 10px 15px;
@@ -102,9 +104,9 @@
 #creator .cr-subtab:hover { background: var(--cr-tile-hover); }
 #creator .cr-subtab.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
 
-/* The chosen piece: a card on the RIGHT of the screen, with the photo, the name and the colours. The column is
-   no longer the positioning reference (static), so the card anchors on .cr-scale, like the footer. The stage
-   (drag and camera centre) stops before the card, and the character stands between the column and the card. */
+/* A peça escolhida: cartão à DIREITA da tela, com a foto, o nome e as cores. A coluna deixa de ser a
+   referência de posição (static), então ele se ancora no .cr-scale, como o rodapé. O palco (arrasto e
+   centro da câmera) para antes do cartão, e o personagem fica entre a coluna e o cartão. */
 #creator .cr-left { position: static; }
 #creator #cr-stage { margin-right: calc(var(--cr-left-w) + 20px); }
 #creator #cr-options {
@@ -120,8 +122,8 @@
     border-radius: 6px;
     box-shadow: var(--ui-shadow);
 }
-/* Photo and name on top; the piece's colours across the whole card just below (.cr-band-main leaves the box
-   with display: contents, and title, collection, count and colours become grid cells). */
+/* Foto + nome em cima; as cores da peça na largura toda do cartão, logo embaixo (a .cr-band-main
+   some da caixa com display: contents, e título, coleção, contagem e cores viram células da grade). */
 #creator .cr-band-top {
     display: grid;
     grid-template-columns: 118px minmax(0, 1fr);
@@ -151,7 +153,7 @@
 #creator .cr-band-body:empty { display: none; }
 #creator .cr-band-top > .cr-band-main:first-child .cr-band-body { margin-top: 6px; }
 
-/* The colours: tiles with each colour's photo, six per row. */
+/* As cores: ladrilhos com a foto de cada cor, seis por linha. */
 #creator .cr-texrow { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; }
 #creator .cr-tex { min-width: 0; padding: 7px 0; border-radius: 5px; color: var(--ui-text-mid); }
 #creator .cr-tex-pic { position: relative; height: auto; aspect-ratio: 1; padding: 0; }
@@ -172,7 +174,7 @@
 #creator .cr-band-meta { padding-top: 8px; font-size: 10.5px; }
 #creator .cr-opt-label { margin: 9px 0 5px; font-size: 11px; }
 
-/* The photo grid: three per row, dark tiles, the chosen one with a blue ring. */
+/* A grade de fotos: três por linha, ladrilho escuro D12, escolhido com aro azul. */
 #creator #cr-grid {
     margin: 0;
     padding: 10px;
@@ -201,7 +203,7 @@
 #creator .cr-tex, #creator .cr-tex-pic, #creator .cr-tex-more { background: var(--cr-tile); border: 0; }
 #creator .cr-tex.selected, #creator .cr-tex-pic.selected { box-shadow: inset 0 0 0 1.5px var(--ui-accent); background: var(--cr-tile-hover); color: var(--ui-text); }
 
-/* Column footer (shortcuts + undress): its own card. */
+/* Rodapé da coluna (atalhos + tirar roupa): cartão próprio, como "Controles" do QF. */
 #creator .cr-left-foot {
     margin: 0;
     padding: 9px 12px;
@@ -213,7 +215,7 @@
 #creator .cr-hints { font-size: 10.5px; gap: 4px 12px; }
 #creator .cr-key { background: var(--cr-tile); border-color: var(--cr-line); }
 
-/* Cancel / Save: under the column, pills (Save = a wide light pill). */
+/* Cancelar / Salvar: embaixo da coluna, pílulas do QF (Salvar = pílula clara larga). */
 #creator .cr-footer {
     left: 20px;
     right: auto;
@@ -240,7 +242,7 @@
 #creator .cr-btn-primary { flex: 2 1 0; background: var(--ui-pill); color: var(--ui-pill-ink); }
 #creator .cr-btn-primary:hover { background: #fff; }
 
-/* ---- Store cart (d11_lojas, with its whip_core appearance-policy patch): bottom right, under the piece card ---- */
+/* ---- Carrinho da loja (D11 PATCH appearance-policy): embaixo, à direita, abaixo do card da peça ---- */
 #creator.has-cart #cr-options { max-height: calc(48% - 30px); overflow: hidden; }
 #creator.has-cart .cr-band-body { max-height: 190px; }
 
@@ -308,5 +310,705 @@
 #creator .cr-cart-buy:hover { background: #fff; }
 #creator .cr-cart-buy:disabled { opacity: 0.45; cursor: default; }
 
-/* In a store the cart has "Confirm purchase": the footer's Save goes (creator.js) and Cancel takes the row. */
+/* Na loja o carrinho tem o "Confirmar compra": o Salvar do rodapé some (creator.js) e o Cancelar ocupa a linha. */
 #creator.has-cart .cr-footer .cr-btn { flex: 1 1 auto; }
+
+/* ---- creator-faces (2026-11-17): grupos sem sobrepor, filtro de rostos, legenda de teclas, painel oculto ---- */
+
+/* Grupos: "ACESSÓRIOS" e "TATUAGENS" não cabiam em cinco colunas iguais e encostavam; a largura segue a palavra. */
+#creator .cr-group {
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 8px 9px 7px;
+    font-size: 10.5px;
+    white-space: nowrap;
+}
+
+/* Herança: Mãe/Pai/Avô e, na linha de baixo, o filtro Femininos/Masculinos/Todos em três partes iguais. */
+#creator #cr-subtabs { flex-wrap: wrap; align-items: center; row-gap: 6px; }
+#creator .cr-subtab-sep { flex: 0 0 100%; height: 0; margin: 0; }   /* quebra: o filtro fica na linha de baixo */
+#creator .cr-sexchip { flex: 1 1 0; padding: 5px 0; font-size: 11px; text-align: center; }
+#creator .cr-sexchip.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+
+/* Rodapé: mouse + Despir na primeira linha, as teclas da câmera na de baixo. */
+#creator .cr-left-foot { flex-wrap: wrap; row-gap: 8px; }
+#creator .cr-key-hints {
+    flex: 1 0 100%;
+    gap: 5px 6px;
+    padding-top: 8px;
+    border-top: 1px solid var(--cr-line);
+}
+#creator .cr-keybtn {
+    gap: 5px;
+    padding: 3px 7px 3px 4px;
+    font: inherit;
+    color: var(--ui-text-mid);
+    background: none;
+    border: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#creator .cr-keybtn:hover { color: var(--ui-text); background: var(--cr-tile-hover); }
+#creator .cr-keybtn.on { color: var(--ui-text); background: var(--cr-tile); }
+#creator .cr-keybtn.on .cr-key { color: var(--ui-pill-ink); background: var(--ui-pill); border-color: transparent; }
+#creator .cr-key-hints .cr-key { min-width: 9px; padding: 2px 5px; text-align: center; }
+#creator .cr-key-hints .cr-key + .cr-key { margin-left: -2px; }
+#creator .cr-key-hints > .cr-hint:not(.cr-keybtn) { margin-left: auto; padding-right: 4px; }
+html[data-input="pad"] #creator .cr-key-hints { display: none; }
+
+/* H: só o personagem e a linha das teclas (para saber como voltar). Esc também volta. */
+#creator.cr-ui-hidden .cr-head,
+#creator.cr-ui-hidden #cr-rail,
+#creator.cr-ui-hidden #cr-subtabs,
+#creator.cr-ui-hidden #cr-grid,
+#creator.cr-ui-hidden #cr-options,
+#creator.cr-ui-hidden .cr-footer,
+#creator.cr-ui-hidden .cr-mouse-hints,
+#creator.cr-ui-hidden .cr-undress { display: none !important; }
+#creator.cr-ui-hidden .cr-left-foot { margin-top: auto; opacity: 0.85; }
+
+/* ---- creator-wardrobe (2026-11-17): Parte de cima — as camisetas que combinam, no cartão da peça ---- */
+#creator .cr-combos { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--cr-line); }
+#creator .cr-combos > .cr-opt-label:first-child { margin-top: 0; }
+#creator .cr-combo-row { max-height: 232px; overflow-y: auto; padding-right: 2px; }
+#creator .cr-combo-none {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    padding: 0;
+    color: var(--ui-text-mid);
+}
+#creator .cr-combo-none svg { width: 22px; height: 22px; opacity: 0.7; }
+#creator .cr-combo-none .cr-tex-num { position: static; font-size: 10px; color: inherit; }
+#creator .cr-combo-none.selected { color: var(--ui-text); }
+
+/* ---- creator-wardrobe busca (2026-11-17): campo acima da grade ---- */
+#creator .cr-search { margin: 0; }
+#creator .cr-search[hidden] { display: none; }
+#creator .cr-search .cr-input {
+    width: 100%;
+    box-sizing: border-box;
+    height: 34px;
+    padding: 0 12px 0 32px;
+    font: inherit;
+    font-size: 12px;
+    color: var(--ui-text);
+    background: var(--cr-card) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a9b3ad' stroke-width='2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='6.5'/%3E%3Cpath d='m16 16 4 4'/%3E%3C/svg%3E") no-repeat 10px center / 15px;
+    border: 0;
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+    outline: none;
+}
+#creator .cr-search .cr-input::placeholder { color: var(--ui-text-dim); }
+#creator .cr-search .cr-input:focus { box-shadow: var(--ui-shadow), inset 0 0 0 1.5px var(--ui-accent); }
+
+/* =====================================================================================================
+   creator-layout (2026-11-17): a tela inteira reorganizada. Abas dos grupos no topo (Q/E), carteira à
+   direita; à esquerda o grupo em letras grandes, a coluna de ícones das categorias e os cartões (com preço
+   na loja); à direita "Personalização" (o item, suas seções que fecham e, numa blusa, abas); embaixo à
+   direita o carrinho, Cancelar/Salvar e as teclas. Medidas em px do .cr-scale (1707 x 960 em 1080p).
+   ===================================================================================================== */
+#creator {
+    --cr-left-w: 404px;
+    --cr-right-w: 372px;
+    --cr-edge: 18px;
+    --cr-top-h: 30px;
+    --cr-under-top: calc(var(--cr-edge) + var(--cr-top-h) + 12px);
+}
+
+/* ---- topo: Q, os grupos, E; a carteira ---- */
+#creator .cr-top {
+    position: absolute;
+    z-index: 3;
+    top: var(--cr-edge);
+    left: var(--cr-edge);
+    right: var(--cr-edge);
+    height: var(--cr-top-h);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    pointer-events: none;
+}
+#creator .cr-top > * { pointer-events: auto; }
+#creator .cr-tabkey {
+    flex: 0 0 auto;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--ui-text);
+    background: var(--cr-card);
+    border: 1px solid var(--cr-line);
+    border-radius: 4px;
+    box-shadow: var(--ui-shadow);
+    cursor: pointer;
+}
+#creator .cr-tabkey:hover { background: var(--cr-tile-hover); }
+#creator #cr-groups { display: flex; gap: 4px; width: auto; margin: 0; }
+#creator .cr-group {
+    flex: 0 0 auto;
+    min-width: 0;
+    height: 30px;
+    padding: 0 15px;
+    font-family: var(--ui-font-display);
+    font-size: 12px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    color: var(--ui-text-mid);
+    background: var(--cr-card);
+    border-radius: 4px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-group:hover { color: var(--ui-text); background: var(--cr-tile-hover); }
+#creator .cr-group.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+#creator .cr-wallet { margin-left: auto; display: flex; gap: 5px; }
+#creator .cr-wallet[hidden] { display: none; }
+#creator .cr-wallet-chip {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 30px;
+    padding: 0 12px;
+    font-size: 13px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+    background: var(--ui-accent);
+    border-radius: 4px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-wallet-chip b { font-weight: 800; }
+#creator .cr-wallet-chip svg { width: 15px; height: 15px; }
+
+/* ---- esquerda: o grupo em letras grandes, a coluna de ícones e o painel dos cartões ---- */
+#creator .cr-left {
+    flex: 0 0 var(--cr-left-w);
+    height: calc(100% - var(--cr-under-top) - var(--cr-edge));
+    margin: var(--cr-under-top) 0 0 var(--cr-edge);
+    padding: 0;
+    gap: 8px;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+#creator .cr-head { gap: 0; padding: 0; background: none; }
+#creator .cr-title {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 8px;
+    width: auto;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+}
+#creator .cr-title-name {
+    font-family: var(--ui-font);
+    font-size: 10.5px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ui-text-mid);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+#creator .cr-title-sub { font-size: 10.5px; color: var(--ui-text-dim); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6); }
+#creator .cr-section { display: flex; align-items: baseline; gap: 12px; min-width: 0; }
+#creator #cr-section-name {
+    font-family: var(--ui-font-display);
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--ui-text);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+#creator #cr-crumb {
+    font-family: var(--ui-font-display);
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--ui-text);
+    opacity: 0.8;
+    text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#creator .cr-body { flex: 0 1 auto; min-height: 0; display: flex; align-items: flex-start; gap: 6px; }
+
+/* A coluna de ícones das categorias, cada um com a palavra embaixo. */
+#creator #cr-rail {
+    flex: 0 0 58px;
+    max-height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 4px;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+#creator .cr-tab {
+    flex: 0 0 auto;
+    width: 58px;
+    padding: 7px 2px 6px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3px;
+    white-space: normal;
+    text-align: center;
+    color: var(--ui-text-mid);
+    background: var(--cr-card);
+    border-radius: 5px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-tab:hover { color: var(--ui-text); background: var(--cr-tile-hover); }
+#creator .cr-tab.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+#creator .cr-tab::after { display: none; }
+#creator .cr-tab-ico svg { display: block; width: 20px; height: 20px; }
+#creator .cr-tab-word {
+    max-width: 54px;
+    font-family: var(--ui-font);
+    font-size: 8.5px;
+    font-weight: 600;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+}
+
+/* O painel: abas de cima (Mãe/Pai, Penteado...), busca e cartões; a altura segue o que tem dentro. */
+#creator .cr-panel {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px;
+    background: var(--cr-card);
+    border-radius: 6px;
+    box-shadow: var(--ui-shadow);
+}
+#creator .cr-panel #cr-subtabs { flex: 0 0 auto; margin: 0; }
+#creator .cr-panel .cr-subtab { box-shadow: none; background: var(--cr-tile); }
+#creator .cr-panel .cr-subtab.active { background: var(--ui-pill); }
+#creator .cr-panel .cr-search .cr-input { height: 30px; background-color: var(--cr-tile); box-shadow: none; }
+#creator .cr-panel #cr-grid {
+    flex: 0 1 auto;
+    min-height: 0;
+    margin: 0;
+    padding: 0 2px 0 0;
+    gap: 6px;
+    background: none;
+    box-shadow: none;
+    border-radius: 0;
+}
+#creator .cr-panel .cr-card { flex: 0 0 calc((100% - 12px) / 3); height: 106px; }
+#creator .cr-panel .cr-card-num { left: 6px; right: 6px; bottom: 5px; font-size: 9.5px; }
+#creator .cr-panel .cr-card-name { font-size: 9.5px; line-height: 1.15; }
+#creator .cr-panel .cr-card.named .cr-icon { inset: 5px 6px 28px; width: calc(100% - 12px); height: calc(100% - 33px); }
+#creator .cr-card-price {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 1px 5px;
+    font-size: 9.5px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: #fff;
+    background: var(--ui-accent);
+    border-radius: 3px;
+    pointer-events: none;
+}
+
+/* ---- palco: o personagem entre os dois lados ---- */
+#creator #cr-stage { margin: 0 calc(var(--cr-right-w) + var(--cr-edge) * 2) 0 var(--cr-edge); }
+
+/* ---- direita: Personalização ---- */
+#creator .cr-right {
+    position: absolute;
+    z-index: 2;
+    top: var(--cr-under-top);
+    right: var(--cr-edge);
+    bottom: 150px;
+    width: var(--cr-right-w);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    pointer-events: none;
+}
+#creator.has-cart .cr-right { bottom: 400px; }
+#creator .cr-right > * { pointer-events: auto; }
+#creator .cr-right-title {
+    display: none;
+    text-align: right;
+    font-family: var(--ui-font-display);
+    font-size: 30px;
+    font-style: italic;
+    font-weight: 800;
+    line-height: 1.1;
+    text-transform: uppercase;
+    color: var(--ui-text);
+    text-shadow: 0 2px 14px rgba(0, 0, 0, 0.55);
+}
+#creator.band-open .cr-right-title { display: block; }
+#creator .cr-right #cr-options {
+    position: static;
+    width: auto;
+    max-height: none;
+    min-height: 0;
+    flex: 0 1 auto;
+    overflow: hidden;
+    padding: 10px;
+}
+#creator.has-cart .cr-right #cr-options { max-height: none; }
+#creator .cr-right .cr-band-top { grid-template-columns: 64px minmax(0, 1fr); column-gap: 10px; }
+#creator .cr-right .cr-hero { width: 64px; height: 64px; }
+#creator .cr-right .cr-hero .cr-icon { inset: 4px; width: calc(100% - 8px); height: calc(100% - 8px); }
+#creator .cr-right .cr-band-title { font-size: 15px; line-height: 1.15; }
+#creator .cr-right .cr-band-title.small { font-size: 14px; }
+#creator .cr-right .cr-band-sub { margin-top: 2px; font-size: 10.5px; }
+#creator .cr-right .cr-band-meta { padding-top: 2px; font-size: 10px; }
+#creator .cr-right .cr-band-body { max-height: none; margin: 8px -4px 0; }
+#creator.has-cart .cr-right .cr-band-body { max-height: none; }
+
+/* Abas de cima do painel (uma blusa: Estilos, Camisetas, Braços). */
+#creator .cr-ptabs { display: flex; gap: 4px; margin: 0 0 8px; }
+#creator .cr-ptab {
+    flex: 1 1 0;
+    height: 28px;
+    padding: 0 6px;
+    font-family: var(--ui-font-display);
+    font-size: 11.5px;
+    font-style: italic;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--ui-text-mid);
+    background: var(--cr-tile);
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+}
+#creator .cr-ptab:hover { color: var(--ui-text); background: var(--cr-tile-hover); }
+#creator .cr-ptab.active { color: var(--ui-pill-ink); background: var(--ui-pill); }
+
+/* Seções que fecham: a faixa clara com o nome e a seta. */
+#creator .cr-sec + .cr-sec { margin-top: 8px; }
+#creator .cr-sec-head {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 8px;
+    font: inherit;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ui-pill-ink);
+    background: var(--ui-pill);
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#creator .cr-sec-title { flex: 0 0 auto; }
+#creator .cr-sec-val {
+    flex: 1 1 auto;
+    min-width: 0;
+    text-align: right;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    opacity: 0.65;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+#creator .cr-sec-head svg { flex: 0 0 auto; width: 12px; height: 12px; transform: rotate(180deg); transition: transform 0.18s var(--ui-ease); }
+#creator .cr-sec.collapsed .cr-sec-head svg { transform: none; }
+#creator .cr-sec-body { padding-top: 6px; }
+#creator .cr-sec.collapsed .cr-sec-body { display: none; }
+#creator .cr-sec .cr-combo-row { max-height: 200px; }
+
+/* ---- embaixo à direita: carrinho, Cancelar / Salvar e as teclas ---- */
+#creator .cr-footer {
+    position: absolute;
+    z-index: 2;
+    left: auto;
+    right: var(--cr-edge);
+    bottom: var(--cr-edge);
+    width: var(--cr-right-w);
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+}
+#creator .cr-footer > * { pointer-events: auto; }
+#creator .cr-footer .cr-left-foot { order: 9; padding: 8px 10px; }
+#creator .cr-footer .cr-btns { width: 100%; }
+
+/* O carrinho: a lista curta e o total numa faixa azul, como "Total" em destaque. */
+#creator .cr-footer #cr-cart {
+    position: static;
+    width: auto;
+    max-height: none;
+    padding: 10px;
+    gap: 6px;
+}
+#creator .cr-footer .cr-cart-title { font-size: 15px; }
+#creator .cr-footer .cr-cart-list { max-height: 112px; }
+#creator .cr-footer .cr-cart-row { padding: 5px 6px 5px 9px; }
+#creator .cr-footer .cr-cart-total {
+    align-items: center;
+    margin: 2px -10px 0;
+    padding: 6px 12px;
+    border-top: 0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+    background: var(--ui-accent);
+}
+#creator .cr-footer .cr-cart-total b { font-size: 19px; color: #fff; }
+
+/* Só o personagem (H): sem o topo e sem o título da direita também. */
+#creator.cr-ui-hidden .cr-top,
+#creator.cr-ui-hidden .cr-right,
+#creator.cr-ui-hidden .cr-panel,
+#creator.cr-ui-hidden #cr-rail,
+#creator.cr-ui-hidden #cr-cart { display: none !important; }
+#creator.cr-ui-hidden .cr-footer { display: flex !important; }
+#creator.cr-ui-hidden .cr-footer > :not(.cr-left-foot) { display: none !important; }
+#creator .cr-card.selected .cr-card-price { display: none; }   /* a peça vestida já é sua */
+/* No painel da direita (estreito): pad e sliders um sobre o outro; cores da maquiagem também; a foto do cabelo menor. */
+#creator .cr-right .cr-band-cols { flex-direction: column; gap: 6px; }
+#creator .cr-right .cr-pad-wrap { max-width: none; padding: 20px 64px 22px; }
+#creator .cr-right .cr-band-sided .cr-band-top { display: flex; gap: 10px; }
+#creator .cr-right .cr-band-sided .cr-hero { flex: 0 0 96px; width: 96px; height: 96px; }
+
+/* ---- creator-layout: rodapé compacto (legenda pequena em caixa alta, sem cartão) e carrinho enxuto ---- */
+#creator .cr-right { bottom: calc(var(--cr-foot-h, 120px) + var(--cr-edge) + 10px); }
+#creator.has-cart .cr-right { bottom: calc(var(--cr-foot-h, 220px) + var(--cr-edge) + 10px); }
+#creator .cr-footer { gap: 6px; }
+
+#creator .cr-footer .cr-left-foot {
+    padding: 0 2px;
+    gap: 4px 10px;
+    row-gap: 4px;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    justify-content: flex-end;
+}
+#creator .cr-footer .cr-hints { flex: 0 1 auto; justify-content: flex-end; gap: 3px 10px; font-size: 9px; }
+#creator .cr-footer .cr-hint {
+    gap: 4px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ui-text);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+#creator .cr-footer .cr-hint b { font-weight: 700; color: var(--ui-text-mid); }
+#creator .cr-footer .cr-mouse { width: 11px; height: 16px; }
+#creator .cr-footer .cr-key-hints { flex: 1 0 100%; padding: 0; border: 0; gap: 3px 10px; }
+#creator .cr-footer .cr-key-hints > .cr-hint:not(.cr-keybtn) { margin-left: 0; padding: 0; }
+#creator .cr-footer .cr-keybtn { padding: 1px 3px; gap: 4px; border-radius: 3px; }
+#creator .cr-footer .cr-keybtn.cr-keyonly { padding: 0; }
+#creator .cr-footer .cr-keygroup { gap: 2px; }
+#creator .cr-footer .cr-key-hints .cr-key {
+    min-width: 8px;
+    padding: 1px 4px;
+    font-size: 9px;
+    line-height: 1.2;
+    background: rgba(16, 20, 25, 0.85);
+}
+#creator .cr-footer .cr-keybtn.on { background: none; }
+#creator .cr-footer .cr-undress { order: -1; }
+#creator .cr-footer .cr-dress { padding: 3px 9px; font-size: 9px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* Carrinho: cabeçalho numa linha, sem a frase de vazio, total numa faixa fina, Cancelar ao lado do Confirmar. */
+#creator .cr-footer #cr-cart { padding: 8px 10px 10px; gap: 6px; }
+#creator .cr-footer .cr-cart-head { align-items: center; }
+#creator .cr-footer .cr-cart-title { font-size: 13px; }
+#creator .cr-footer .cr-cart-sub { font-size: 10px; }
+#creator .cr-footer .cr-cart-list { max-height: 78px; gap: 3px; }
+#creator .cr-footer .cr-cart-row { padding: 4px 4px 4px 8px; }
+#creator .cr-footer .cr-cart-label, #creator .cr-footer .cr-cart-price { font-size: 11px; }
+#creator .cr-footer .cr-cart-x { width: 18px; height: 18px; line-height: 18px; font-size: 13px; }
+#creator .cr-footer .cr-cart-total { margin: 0 -10px; padding: 4px 12px; font-size: 10px; }
+#creator .cr-footer .cr-cart-total b { font-size: 16px; }
+#creator .cr-footer .cr-cart-pay { padding: 5px 9px; }
+#creator .cr-footer .cr-cart-pay span { font-size: 11px; }
+#creator .cr-footer .cr-cart-pay small { font-size: 9.5px; }
+#creator .cr-cart-actions { display: flex; gap: 6px; }
+#creator .cr-cart-actions .cr-btn { flex: 1 1 0; height: 32px; font-size: 12px; }
+#creator .cr-cart-actions .cr-cart-buy { flex: 2 1 0; height: 32px; font-size: 12px; }
+#creator.has-cart .cr-footer .cr-btns { display: none; }
+#creator .cr-footer .cr-btn { height: 34px; }
+/* A legenda numa grade de 4 colunas, alinhada à direita (os itens do mouse e das teclas na mesma grade). */
+html:not([data-input="pad"]) #creator .cr-footer .cr-left-foot {
+    display: grid;
+    grid-template-columns: repeat(4, max-content);
+    justify-content: end;
+    align-items: center;
+    gap: 4px 12px;
+}
+html:not([data-input="pad"]) #creator .cr-footer .cr-mouse-hints,
+html:not([data-input="pad"]) #creator .cr-footer .cr-key-hints { display: contents; }
+#creator .cr-footer .cr-mouse { display: none; }
+#creator .cr-footer .cr-undress { grid-column: 1; grid-row: 1; }
+
+/* ---- creator-layout: as teclas numa linha só, no centro, embaixo da tela ---- */
+#creator .cr-right { bottom: calc(var(--cr-foot-h, 60px) + var(--cr-edge) + 10px); }
+#creator.has-cart .cr-right { bottom: calc(var(--cr-foot-h, 140px) + var(--cr-edge) + 10px); }
+#creator .cr-scale > .cr-left-foot {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    bottom: var(--cr-edge);
+    transform: translateX(-50%);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    white-space: nowrap;
+    background: none;
+    border: 0;
+    box-shadow: none;
+}
+#creator .cr-scale > .cr-left-foot .cr-mouse-hints,
+#creator .cr-scale > .cr-left-foot .cr-key-hints { display: contents; }
+html[data-input="pad"] #creator .cr-scale > .cr-left-foot .cr-mouse-hints,
+html[data-input="pad"] #creator .cr-scale > .cr-left-foot .cr-key-hints { display: none; }
+#creator .cr-scale > .cr-left-foot .cr-pad-hints { flex-wrap: nowrap; gap: 12px; }
+#creator .cr-scale > .cr-left-foot .cr-mouse { display: none; }
+#creator .cr-scale > .cr-left-foot .cr-hint {
+    gap: 4px;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ui-text);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.85);
+}
+#creator .cr-scale > .cr-left-foot .cr-hint b { font-weight: 700; color: var(--ui-text-mid); }
+#creator .cr-scale > .cr-left-foot .cr-key {
+    min-width: 8px;
+    padding: 1px 4px;
+    font-size: 9.5px;
+    line-height: 1.2;
+    background: rgba(16, 20, 25, 0.85);
+}
+#creator .cr-scale > .cr-left-foot .cr-keybtn { padding: 1px 2px; gap: 4px; border-radius: 3px; background: none; }
+#creator .cr-scale > .cr-left-foot .cr-keybtn:hover .cr-key { background: var(--cr-tile-hover); }
+#creator .cr-scale > .cr-left-foot .cr-keybtn.on .cr-key { color: var(--ui-pill-ink); background: var(--ui-pill); }
+#creator .cr-scale > .cr-left-foot .cr-keybtn.cr-keyonly { padding: 0; }
+#creator .cr-scale > .cr-left-foot .cr-keygroup { gap: 2px; }
+#creator .cr-scale > .cr-left-foot .cr-key-hints > .cr-hint:not(.cr-keybtn) { margin: 0; padding: 0; }
+#creator .cr-scale > .cr-left-foot .cr-undress { order: 99; }
+#creator .cr-scale > .cr-left-foot .cr-dress {
+    padding: 3px 10px;
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(16, 20, 25, 0.85);
+}
+/* Com o painel oculto (H) a linha continua lá, para saber como voltar. */
+#creator.cr-ui-hidden .cr-scale > .cr-left-foot { display: flex !important; margin: 0; opacity: 1; }
+/* Duas linhas no centro: em cima o mouse (e Despir), embaixo as teclas; nunca mais larga que o vão entre os painéis. */
+#creator .cr-scale > .cr-left-foot {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 5px;
+    max-width: calc(100% - 2 * (var(--cr-left-w) + var(--cr-edge) + 16px));
+}
+html:not([data-input="pad"]) #creator .cr-scale > .cr-left-foot .cr-mouse-hints {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: nowrap;
+    gap: 12px;
+}
+html:not([data-input="pad"]) #creator .cr-scale > .cr-left-foot .cr-key-hints {
+    display: flex;
+    flex: 0 0 100%;
+    order: 100;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 12px;
+}
+#creator .cr-scale > .cr-left-foot .cr-undress { order: 1; }
+
+/* ---- creator-photostudio: o estúdio de fotos (d11_photostudio) aberto por cima; o criador some até ele fechar ---- */
+#creator.cr-photo-mode .cr-scale > * { display: none !important; }
+
+/* ---- Visuais (creator-photostudio): cartões em retrato com a foto do personagem, dois por linha ---- */
+#creator[data-kind="outfits"] .cr-panel { flex: 1 1 auto; }
+#creator[data-kind="outfits"] .cr-panel #cr-grid { gap: 8px; }
+#creator[data-kind="outfits"] .cr-panel .cr-card {
+    flex: 0 0 calc((100% - 8px) / 2);
+    height: auto;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    border-radius: 6px;
+}
+#creator[data-kind="outfits"] .cr-panel .cr-card .cr-icon,
+#creator[data-kind="outfits"] .cr-panel .cr-card.named .cr-icon {
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+#creator[data-kind="outfits"] .cr-panel .cr-card::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 42%;
+    background: linear-gradient(to top, rgba(8, 10, 14, 0.92), transparent);
+    pointer-events: none;
+}
+#creator[data-kind="outfits"] .cr-panel .cr-card .cr-card-num {
+    z-index: 1;
+    left: 9px;
+    right: 9px;
+    bottom: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ui-text);
+    -webkit-line-clamp: 2;
+}
+#creator[data-kind="outfits"] .cr-panel .cr-card.selected { box-shadow: inset 0 0 0 2px var(--ui-accent), 0 0 0 1px rgba(0, 156, 228, 0.35); }
+#creator[data-kind="outfits"] .cr-panel .cr-card.selected .cr-card-num { color: #fff; }
+
+/* O painel da direita do visual: a foto maior, em retrato, e os botões em pilha. */
+#creator[data-kind="outfits"] .cr-right .cr-band-top { grid-template-columns: 96px minmax(0, 1fr); }
+#creator[data-kind="outfits"] .cr-right .cr-hero { width: 96px; height: 128px; overflow: hidden; }
+#creator[data-kind="outfits"] .cr-right .cr-hero .cr-icon { inset: 0; width: 100%; height: 100%; object-fit: cover; }
+#creator[data-kind="outfits"] .cr-right .cr-band-title { font-size: 17px; }
+#creator[data-kind="outfits"] .cr-right .cr-outfit-row { display: flex; gap: 6px; margin-top: 6px; }
+#creator[data-kind="outfits"] .cr-right .cr-outfit-row .cr-input { flex: 1 1 auto; min-width: 0; }
+#creator[data-kind="outfits"] .cr-right .cr-outfit-row > .cr-obtn:only-child { flex: 1 1 auto; }
+#creator .cr-outfit-free { margin-top: 8px; color: var(--ui-accent); }

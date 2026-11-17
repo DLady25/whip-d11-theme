@@ -7,15 +7,14 @@
 
 /* The layers, one per screen (selectors scoped to each panel; the tokens below apply to everything).
    ?v=N: FiveM's NUI caches CSS by its address; raise N when a layer changes. */
-/* Running d11_hud too? Uncomment its two lines below (round minimap, rev dial and WHIP's status gauges hidden, voice as a
-   circle); keeping WHIP's health gauges (d11_hud's Status = false), only the hud.css one. Off by default: an @import
-   that does not load (d11_hud not installed) makes whip_core drop the whole theme and fall back to the base look. */
-/* @import url('https://cfx-nui-d11_hud/whip/hud.css?v=3'); */
-/* @import url('https://cfx-nui-d11_hud/whip/status.css?v=3'); */
+/* d11_hud's layer (round minimap, rev dial and WHIP's status gauges hidden, voice as a circle): d11_hud writes it into
+   css/d11_hud.css when it starts and empties it when it stops, so nothing to edit here, with or without d11_hud.
+   Always a local file: an @import that does not load would make whip_core drop the whole theme. */
+@import url('css/d11_hud.css?v=1');
 @import url('css/menus.css?v=4');
 @import url('css/inventory.css?v=7');
 @import url('css/notify.css?v=2');
-@import url('css/creator.css?v=3');
+@import url('css/creator.css?v=13');
 
 /* Fonts (SIL Open Font License), relative to theme.css (https://cfx-nui-<this resource>/). */
 @font-face {
